@@ -1,6 +1,6 @@
 # Auditoria de Acessos e Logs
 
-Projeto acadêmico desenvolvido por Gabrielly Santos Pereira e Gabriel Cassin Tonon da Costa.
+Projeto acadêmico desenvolvido em dupla durante a graduação em Sistemas de Informação.
 
 ## Objetivo
 
@@ -18,9 +18,9 @@ Analisar registros de acesso e dados de usuários para identificar situações q
 
 Python, pandas e matplotlib.
 
-## Autoria
+## Participação
 
-Gabrielly Santos Pereira e Gabriel Cassin Tonon da Costa.
+Atividade desenvolvida em equipe, com foco na análise dos registros e visualização dos resultados.
 
 ## Publicação
 

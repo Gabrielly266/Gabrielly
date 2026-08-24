@@ -1,19 +1,13 @@
-# Avaliação de Governança com COBIT
+# Indicadores de governança com COBIT
 
-Script de análise de indicadores de governança de TI baseado nos domínios do framework COBIT.
+Projeto acadêmico sobre os cinco domínios do COBIT: EDM, APO, BAI, DSS e MEA.
 
-## Funcionalidades
+O programa classifica indicadores, calcula a média de cada domínio e ajusta a nota de maturidade conforme o foco da análise. Também identifica quais indicadores ficaram abaixo da meta.
 
-- Classificação de indicadores nos domínios EDM, APO, BAI, DSS e MEA.
-- Avaliação de geração de valor considerando benefícios, custos e riscos.
-- Cálculo de maturidade com pesos ajustados ao foco estratégico.
-- Identificação de indicadores abaixo da meta.
-- Geração de relatório executivo no terminal.
-
-## Como executar
+## Executar
 
 ```bash
 python governanca_cobit.py
 ```
 
-Durante a execução, escolha `inovacao` ou `seguranca` como foco estratégico. Os indicadores são exemplos acadêmicos.
+Na execução, informe `inovacao` ou `seguranca`. Todos os indicadores são fictícios e servem apenas para demonstrar o funcionamento.

@@ -1,55 +1,57 @@
 #include <stdio.h>
-#include <stdlib.h>
-#ifdef _WIN32
-#include <windows.h>
-#endif
 
-int lerMatricula(){
+#define QUANTIDADE_NOTAS 3
+
+void limpar_entrada(void) {
+    int caractere;
+    while ((caractere = getchar()) != '\n' && caractere != EOF) {
+    }
+}
+
+int ler_matricula(void) {
     int matricula;
-    printf("Digite sua matrícula:");
-    scanf("%d", &matricula);
-    while (matricula<0){
-        printf("Digite novamente:");
-        scanf("%d", &matricula);
+
+    while (1) {
+        printf("Matrícula: ");
+        if (scanf("%d", &matricula) == 1 && matricula >= 0) {
+            limpar_entrada();
+            return matricula;
+        }
+
+        printf("Informe uma matrícula válida.\n");
+        limpar_entrada();
     }
-    return matricula;
 }
 
-float lerNota(){
-    float n;
-    printf("Digite sua nota:");
-    scanf("%f", &n);
-    while ((n<0)||(n>10)){
-        printf("Digite novamente:");
-        scanf("%f", &n);
+float ler_nota(int numero) {
+    float nota;
+
+    while (1) {
+        printf("Nota %d: ", numero);
+        if (scanf("%f", &nota) == 1 && nota >= 0.0f && nota <= 10.0f) {
+            limpar_entrada();
+            return nota;
+        }
+
+        printf("A nota deve estar entre 0 e 10.\n");
+        limpar_entrada();
     }
-    return n;
 }
 
-float media(){
-    int cont=0;
-    float soma=0, n, media;
+float calcular_media(void) {
+    float soma = 0.0f;
 
-    while (cont<3){
-        n=lerNota();
-        soma=soma+n;
-        cont=cont+1;
+    for (int i = 1; i <= QUANTIDADE_NOTAS; i++) {
+        soma += ler_nota(i);
     }
-    media=soma/3;
-    return media;
-} 
 
-int main() {
-    int matri;
-    float m;
+    return soma / QUANTIDADE_NOTAS;
+}
 
-    #ifdef _WIN32
-    SetConsoleOutputCP(65001);
-    #endif
+int main(void) {
+    int matricula = ler_matricula();
+    float media = calcular_media();
 
-    matri=lerMatricula();
-    m=media();
-    printf("Matrícula %d | Média: %.2f\n", matri, m);
-    
+    printf("\nMatrícula: %d\nMédia: %.2f\n", matricula, media);
     return 0;
 }

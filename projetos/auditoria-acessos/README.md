@@ -1,21 +1,14 @@
-# Auditoria de Acessos e Logs
+# Auditoria de acessos
 
-Script de auditoria que cruza registros de acesso com uma base de usuários ativos para identificar riscos de segurança.
+Análise de registros de acesso para encontrar três situações: usuários ausentes da base de contas ativas, acessos fora do horário comercial e conexões bem-sucedidas por IP externo.
 
-## Verificações realizadas
+O projeto usa pandas para cruzar os arquivos CSV e matplotlib para gerar um gráfico com o resultado.
 
-- Contas presentes nos logs, mas ausentes da base de usuários ativos.
-- Acessos registrados fora do horário comercial, das 8h às 18h.
-- Acessos bem-sucedidos provenientes de endereços IP externos.
-- Geração de um gráfico com a distribuição dos riscos identificados.
-
-## Como executar
+## Executar
 
 ```bash
 pip install -r requirements.txt
 python auditoria.py
 ```
 
-Os arquivos CSV incluídos contêm **exclusivamente dados sintéticos**, criados para demonstrar a execução sem expor informações pessoais ou registros reais. O gráfico é salvo como `riscos_seguranca.png`.
-
-**Tecnologias:** Python, pandas, matplotlib e arquivos CSV.
+O gráfico é salvo como `riscos_seguranca.png`. Os arquivos CSV do repositório contêm apenas dados fictícios.

@@ -1,76 +1,46 @@
 # Gabrielly Santos Pereira
 
-**Sistemas de Informação · IFES Campus Colatina**  
-Banco de Dados · Desenvolvimento de Software · Análise de Dados
+Estudante de Sistemas de Informação no IFES Campus Colatina, com interesse em banco de dados, programação e análise de dados.
 
-Sou estudante de Sistemas de Informação, com formação prevista para dezembro de 2028. Este portfólio reúne códigos de projetos acadêmicos concluídos, estudos práticos e experiências desenvolvidas durante a graduação.
+Uso este repositório para reunir projetos desenvolvidos durante a graduação e acompanhar minha evolução nos estudos.
 
-## Conhecimentos técnicos
+## Projetos
 
-| Área | Tecnologias e conhecimentos |
-| --- | --- |
-| Programação | Python, C e C++ |
-| Banco de dados | SQL, PostgreSQL, modelagem de dados e operações CRUD |
-| Dados e visualização | pandas, matplotlib e Power BI |
-| Governança e segurança | Auditoria de acessos, indicadores de TI e fundamentos de COBIT |
-| Fundamentos | Algoritmos, recursão, estruturas de dados e processamento paralelo |
-| Ferramentas | Git e GitHub |
+**[Sistema acadêmico em C](projetos/sistema-academico-c/)**  
+Cadastro de estudantes e matrículas, com busca, atualização e armazenamento em arquivo binário.
 
-## Projetos com código disponível
+**[Auditoria de acessos](projetos/auditoria-acessos/)**  
+Análise de logs para identificar contas ausentes, acessos fora do horário e IPs externos. Feito com Python, pandas e matplotlib.
 
-### [Sistema Acadêmico em C](projetos/sistema-academico-c/)
+**[Base de conhecimento](projetos/gestao-conhecimento-sgc/)**  
+Sistema de consulta e cadastro de artigos, com persistência em JSON e acompanhamento de acessos.
 
-Sistema de cadastro de estudantes e matrículas com pesquisa, atualização, exclusão e persistência em arquivo binário.
+**[Painel de governança de TI](projetos/painel-governanca-ti/)**  
+Consolidação de incidentes e problemas por serviço usando Python e pandas.
 
-**Tecnologias:** C · structs · CRUD · arquivos binários
+**[Indicadores de governança com COBIT](projetos/governanca-cobit/)**  
+Classificação de indicadores, cálculo de maturidade e acompanhamento de metas.
 
-### [Auditoria de Acessos e Logs](projetos/auditoria-acessos/)
+**[Processamento de transações](projetos/processamento-transacoes/)**  
+Simulação de regras de negócio e processamento paralelo com `multiprocessing`.
 
-Cruzamento de logs com usuários ativos para detectar contas órfãs, acessos fora do horário comercial e IPs externos. Inclui bases sintéticas de demonstração.
+**[Exercícios em C](projetos/algoritmos-c/)**  
+Fibonacci com recursão e memorização, além de cálculo de média com validação de entrada.
 
-**Tecnologias:** Python · pandas · matplotlib · CSV
+## O que tenho estudado
 
-### [Sistema de Gestão do Conhecimento](projetos/gestao-conhecimento-sgc/)
+- Python, C e C++
+- SQL, PostgreSQL e modelagem de banco de dados
+- pandas, matplotlib e Power BI
+- Estruturas de dados, algoritmos e Git
 
-Base de conhecimento com pesquisa textual, cadastro de conteúdos, persistência em JSON e painel de popularidade.
+Também participo de atividades de [iniciação científica](projetos/iniciacao-cientifica-picti-profnit/) e do projeto [Elas Programadoras](projetos/elas-programadoras/). Outros trabalhos, como o [sistema de locadora](projetos/sistema-locadora/) e os estudos de [estruturas de dados](projetos/estruturas-dados/), estão documentados nas respectivas pastas.
 
-**Tecnologias:** Python · JSON · manipulação de arquivos
+## Rodando os testes
 
-### [Painel de Governança de TI](projetos/painel-governanca-ti/)
+```bash
+pip install -r requirements.txt
+python -m unittest discover -s tests -v
+```
 
-Consolidação de incidentes, níveis de prioridade e problemas abertos para acompanhamento de serviços de TI.
-
-**Tecnologias:** Python · pandas · indicadores de gestão
-
-### [Avaliação de Governança com COBIT](projetos/governanca-cobit/)
-
-Classificação de indicadores nos domínios do COBIT, cálculo de maturidade e identificação de desvios em relação às metas.
-
-**Tecnologias:** Python · COBIT · análise de indicadores
-
-### [Processamento Paralelo de Transações](projetos/processamento-transacoes/)
-
-Simulação de eventos com regras automatizadas, clientes VIP, verificação de padrões suspeitos e processamento paralelo.
-
-**Tecnologias:** Python · multiprocessing · regras de negócio
-
-### [Algoritmos em C](projetos/algoritmos-c/)
-
-Exercícios concluídos de recursão, validação de entradas e cálculo de médias.
-
-**Tecnologias:** C · funções · recursão
-
-## Outras experiências e projetos documentados
-
-- [Sistema de Locadora](projetos/sistema-locadora/): projeto acadêmico envolvendo Python, PostgreSQL e operações CRUD.
-- [Estruturas de Dados](projetos/estruturas-dados/): estudos de organização de dados, algoritmos e programação em C/C++.
-- [Iniciação Científica PICTI/PROFNIT](projetos/iniciacao-cientifica-picti-profnit/): experiência acadêmica de pesquisa e análise.
-- [Elas Programadoras](projetos/elas-programadoras/): participação em atividades de formação em tecnologia.
-- [Gestão de Extensão IFES](projetos/gestao-extensao-ifes/): organização de informações relacionadas a projetos de extensão.
-- [Otimização de Estoque](projetos/otimizacao-estoque/): análise de processos e organização de dados para gestão de estoque.
-
-> Os códigos disponibilizados correspondem aos arquivos e relatórios acadêmicos recuperados. Os demais projetos permanecem documentados enquanto seus arquivos originais não estiverem disponíveis.
-
-## Objetivo profissional
-
-Busco oportunidades de estágio e desenvolvimento nas áreas de banco de dados, análise de dados e desenvolvimento de software.
+Formação prevista: dezembro de 2028.

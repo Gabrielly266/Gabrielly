@@ -33,7 +33,7 @@ Aplicação acadêmica em Python e PostgreSQL para cadastro de filmes e clientes
 
 ### [Auditoria de Acessos e Logs](projetos/auditoria-acessos/)
 
-Análise de logs para identificar contas órfãs, acessos fora do horário e endereços IP externos, com visualização dos riscos. Projeto desenvolvido em dupla com Gabriel Cassin Tonon da Costa.
+Análise de logs para identificar contas órfãs, acessos fora do horário e endereços IP externos, com visualização dos riscos. Projeto acadêmico desenvolvido em dupla.
 
 **Tecnologias:** Python · pandas · matplotlib
 
@@ -61,7 +61,7 @@ Estudo de caso em equipe sobre divulgação, participação da comunidade e aná
 
 **Área:** Análise de Sistemas
 
-### [Otimização de Estoque - Bella Massa](projetos/otimizacao-estoque-bella-massa/)
+### [Otimização de Estoque](projetos/otimizacao-estoque/)
 
 Estudo quantitativo em equipe sobre a relação entre estoque e custos de refrigeração.
 

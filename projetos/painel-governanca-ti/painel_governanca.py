@@ -1,57 +1,78 @@
+"""Consolida incidentes e problemas em um painel de serviços de TI."""
+
 import pandas as pd
 
-# ATIVIDADE 3 - PAINEL DE GOVERNANÇA (RESUMO)
 
-# Base de exemplo: incidentes registrados
-df_incidentes = pd.DataFrame({
-    'servico': ['Servico A', 'Servico B', 'Servico A', 'Servico C', 'Servico B'],
-    'ticket_id': [1, 2, 3, 4, 5],
-    'prioridade': ['Alta', 'Baixa', 'Media', 'Alta', 'Baixa']
-})
+def criar_bases_de_exemplo():
+    incidentes = pd.DataFrame(
+        {
+            "servico": [
+                "Serviço A",
+                "Serviço B",
+                "Serviço A",
+                "Serviço C",
+                "Serviço B",
+            ],
+            "ticket_id": [1, 2, 3, 4, 5],
+            "prioridade": ["Alta", "Baixa", "Média", "Alta", "Baixa"],
+        }
+    )
+    problemas = pd.DataFrame({"servico": ["Serviço A", "Serviço C"]})
+    return incidentes, problemas
 
-# Base de exemplo: problemas em aberto
-df_problemas = pd.DataFrame({
-    'servico': ['Servico A', 'Servico C']
-})
 
-print("Bases de exemplo carregadas:")
-print("Primeiros incidentes:")
-print(df_incidentes.head())
+def montar_painel(incidentes, problemas):
+    colunas_incidentes = {"servico", "ticket_id", "prioridade"}
+    if not colunas_incidentes.issubset(incidentes.columns):
+        raise ValueError("A base de incidentes não possui todas as colunas esperadas.")
+    if "servico" not in problemas.columns:
+        raise ValueError("A base de problemas precisa da coluna 'servico'.")
 
-print("Primeiros problemas:")
-print(df_problemas.head())
+    total = incidentes.groupby("servico")["ticket_id"].count()
+    alta = (
+        incidentes.loc[incidentes["prioridade"].str.casefold() == "alta"]
+        .groupby("servico")["ticket_id"]
+        .count()
+    )
 
-# --- RESTANTE DA LÓGICA DO PAINEL DE GOVERNANÇA ---
+    painel = pd.DataFrame(
+        {
+            "total_incidentes": total,
+            "incidentes_prioridade_alta": alta,
+        }
+    )
+    painel["incidentes_prioridade_alta"] = (
+        painel["incidentes_prioridade_alta"].fillna(0).astype(int)
+    )
+    painel["problema_aberto"] = painel.index.isin(problemas["servico"])
+    return painel.sort_values(
+        ["incidentes_prioridade_alta", "total_incidentes"],
+        ascending=False,
+    )
 
-# 1. Contagem total de incidentes por serviço
-total_incidentes_por_servico = df_incidentes.groupby('servico')['ticket_id'].count()
 
-# 2. Contagem de incidentes de Prioridade Alta por serviço
-incidentes_alta = df_incidentes[df_incidentes['prioridade'] == 'Alta']
-incidentes_alta_por_servico = incidentes_alta.groupby('servico')['ticket_id'].count()
+def resumir_painel(painel):
+    total_servicos = len(painel)
+    com_problema = int(painel["problema_aberto"].sum())
+    percentual = round(com_problema / total_servicos * 100, 1) if total_servicos else 0.0
+    return {
+        "total_servicos": total_servicos,
+        "servicos_com_problema": com_problema,
+        "percentual_com_problema": percentual,
+    }
 
-# 3. Montar um DataFrame de painel unificando essas informações
-painel = pd.DataFrame({
-    'total_incidentes': total_incidentes_por_servico,
-    'incidentes_prioridade_alta': incidentes_alta_por_servico
-})
 
-# Preencher com 0 onde não houver incidentes Alta
-painel['incidentes_prioridade_alta'] = painel['incidentes_prioridade_alta'].fillna(0).astype(int)
+def main():
+    incidentes, problemas = criar_bases_de_exemplo()
+    painel = montar_painel(incidentes, problemas)
+    resumo = resumir_painel(painel)
 
-# 4. Adicionar coluna indicando se há Problema aberto para o serviço
-painel['problema_aberto'] = painel.index.isin(df_problemas['servico']).astype(int)
+    print("\nPainel de governança de TI")
+    print(painel.to_string())
+    print(f'\nServiços monitorados: {resumo["total_servicos"]}')
+    print(f'Serviços com problema aberto: {resumo["servicos_com_problema"]}')
+    print(f'Percentual impactado: {resumo["percentual_com_problema"]}%')
 
-print("\n=== PAINEL DE GOVERNANÇA - INCIDENTES, PRIORIDADE ALTA E PROBLEMAS ===")
-print(painel)
 
-# 5. Calcular taxa de serviços com Problema aberto
-qtd_servicos = len(painel)
-qtd_com_problema = painel['problema_aberto'].sum()
-taxa_servicos_com_problema = round((qtd_com_problema / qtd_servicos) * 100, 1)
-
-# Impressão do Resumo Geral com sintaxe corrigida
-print("\nResumo Geral:")
-print(f"Total de serviços monitorados: {qtd_servicos}")
-print(f"Serviços com Problema aberto: {qtd_com_problema}")
-print(f"Taxa de serviços com Problema aberto: {taxa_servicos_com_problema}%")
+if __name__ == "__main__":
+    main()

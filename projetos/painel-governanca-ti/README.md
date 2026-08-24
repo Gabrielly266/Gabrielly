@@ -1,19 +1,14 @@
-# Painel de Governança de TI
+# Painel de governança de TI
 
-Painel analítico que consolida incidentes, prioridades e problemas abertos para apoiar decisões de gestão de serviços de TI.
+Exercício de análise de dados que reúne incidentes e problemas abertos por serviço. A ideia é transformar duas bases simples em um resumo que facilite o acompanhamento da operação.
 
-## Indicadores acompanhados
+O painel mostra o número de incidentes, os chamados de prioridade alta e quais serviços têm problemas abertos. Ao final, calcula o percentual de serviços impactados.
 
-- Total de incidentes por serviço.
-- Incidentes classificados como prioridade alta.
-- Identificação de serviços com problemas em aberto.
-- Percentual de serviços impactados.
-
-## Como executar
+## Executar
 
 ```bash
 pip install -r requirements.txt
 python painel_governanca.py
 ```
 
-**Tecnologias:** Python e pandas. As bases utilizadas são exemplos sintéticos incluídos diretamente no código.
+As informações usadas na demonstração são fictícias.

@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+*.bin
+.venv/
+base_conhecimento.json
+riscos_seguranca.png

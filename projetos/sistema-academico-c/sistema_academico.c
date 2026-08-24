@@ -5,19 +5,21 @@
 #ifdef _WIN32
 #include <windows.h>
 #endif
+
 #define MAX 100
 
-void limparBuffer() {
+void limparBuffer(void) {
     int c;
-    while ((c = getchar()) != '\n' && c != EOF);
+    while ((c = getchar()) != '\n' && c != EOF) {
+    }
 }
 
-void limparBufferStr(char * str) {
-    int tam = strlen(str);
+void limparBufferStr(char *str) {
+    size_t tam = strlen(str);
 
-    if (tam > 0 && str[tam-1] == '\n') {
-        str[tam-1] = '\0';
-    } else {
+    if (tam > 0 && str[tam - 1] == '\n') {
+        str[tam - 1] = '\0';
+    } else if (tam > 0) {
         limparBuffer();
     }
 }
@@ -35,6 +37,47 @@ typedef struct {
     Aluno aluno;
 } Matricula;
 
+int lerInteiro(const char *mensagem) {
+    char entrada[64];
+    char *fim;
+    long valor;
+
+    while (1) {
+        printf("%s", mensagem);
+        if (fgets(entrada, sizeof(entrada), stdin) == NULL) {
+            return 0;
+        }
+
+        valor = strtol(entrada, &fim, 10);
+        if (fim != entrada && (*fim == '\n' || *fim == '\0')) {
+            return (int)valor;
+        }
+
+        printf("Digite um número inteiro válido.\n");
+    }
+}
+
+float lerCoeficiente(const char *mensagem) {
+    char entrada[64];
+    char *fim;
+    float valor;
+
+    while (1) {
+        printf("%s", mensagem);
+        if (fgets(entrada, sizeof(entrada), stdin) == NULL) {
+            return 0.0f;
+        }
+
+        valor = strtof(entrada, &fim);
+        if (fim != entrada && (*fim == '\n' || *fim == '\0')
+            && valor >= 0.0f && valor <= 100.0f) {
+            return valor;
+        }
+
+        printf("O coeficiente precisa estar entre 0 e 100.\n");
+    }
+}
+
 void imprimirMatricula(Matricula vetor) {
     printf("\n");
     printf("  Matrícula  = %d\n", vetor.numeroMatricula);
@@ -45,27 +88,28 @@ void imprimirMatricula(Matricula vetor) {
     printf("  E-mail     = %s\n", vetor.aluno.email);
 }
 
-int pesquisarPorMatricula(Matricula vetor[], int qtd, int matricula){
+int pesquisarPorMatricula(Matricula vetor[], int qtd, int matricula) {
     int i;
     for (i = 0; i < qtd; i++) {
         if (vetor[i].numeroMatricula == matricula) {
-            printf("\nDados encontrados\n");
             return i;
         }
     }
-    printf("Dados não encontrados!\n");
     return -1;
 }
-void inserirAluno(Matricula vetor[], int *qtd){
+
+void inserirAluno(Matricula vetor[], int *qtd) {
     int i;
     Matricula novo;
     if (*qtd >= MAX) {
         printf("\nLimite de matrículas atingido.\n");
         return;
     }
-    printf("\nNúmero da matrícula: ");
-    scanf(" %d", &novo.numeroMatricula);
-    limparBuffer();
+    novo.numeroMatricula = lerInteiro("\nNúmero da matrícula: ");
+    if (novo.numeroMatricula <= 0) {
+        printf("A matrícula deve ser maior que zero.\n");
+        return;
+    }
     i = pesquisarPorMatricula(vetor, *qtd, novo.numeroMatricula);
     if (i != -1) {
         printf("\nMatrícula já cadastrada!");
@@ -84,14 +128,7 @@ void inserirAluno(Matricula vetor[], int *qtd){
     printf("\nCurso: ");
     fgets(novo.curso, sizeof(novo.curso), stdin);
     limparBufferStr(novo.curso);
-    do {
-        printf("\nCoeficiente (0 a 100): ");
-        scanf(" %f", &novo.coeficiente);
-        limparBuffer();
-        if (novo.coeficiente < 0 || novo.coeficiente > 100) {
-            printf("\nValor inválido. Digite um número entre 0 e 100.");
-        }
-    } while (novo.coeficiente < 0 || novo.coeficiente > 100);
+    novo.coeficiente = lerCoeficiente("\nCoeficiente (0 a 100): ");
     vetor[*qtd] = novo;
     (*qtd)++;
     printf("\nAluno inserido com sucesso!\n");
@@ -109,23 +146,15 @@ void pesquisarPorNome(Matricula vetor[], int qtd, char nome[]){
         printf("\nNenhum aluno encontrado com esse nome.\n");
     }
 }
-void atualizarCoeficiente(Matricula vetor[], int qtd){
+void atualizarCoeficiente(Matricula vetor[], int qtd) {
     int matricula, pos;
-    printf("\nDigite a matrícula: ");
-    scanf(" %d", &matricula);
-    limparBuffer();
+    matricula = lerInteiro("\nDigite a matrícula: ");
     pos = pesquisarPorMatricula(vetor, qtd, matricula);
     if (pos == -1) {
+        printf("Matrícula não encontrada.\n");
         return;
     }
-    do {
-        printf("\nNovo coeficiente (0 a 100): ");
-        scanf(" %f", &vetor[pos].coeficiente);
-        limparBuffer();
-        if (vetor[pos].coeficiente < 0 || vetor[pos].coeficiente > 100) {
-            printf("\nValor inválido.\n");
-        }
-    } while (vetor[pos].coeficiente < 0 || vetor[pos].coeficiente> 100);
+    vetor[pos].coeficiente = lerCoeficiente("\nNovo coeficiente (0 a 100): ");
     printf("Coeficiente atualizado com sucesso!\n");
 }
 void maiorCoeficiente(Matricula vetor[], int qtd){
@@ -144,13 +173,12 @@ void maiorCoeficiente(Matricula vetor[], int qtd){
     printf("\nAluno com maior coeficiente:\n");
     imprimirMatricula (vetor[pos]);
 }
-void excluirAluno(Matricula vetor[], int *qtd){
+void excluirAluno(Matricula vetor[], int *qtd) {
     int matricula, pos, i;
-    printf("\nDigite a matrícula a excluir: ");
-    scanf(" %d", &matricula);
-    limparBuffer();
+    matricula = lerInteiro("\nDigite a matrícula a excluir: ");
     pos = pesquisarPorMatricula(vetor, *qtd, matricula);
     if (pos == -1) {
+        printf("Matrícula não encontrada.\n");
         return;
     }
     for (i = pos; i < (*qtd) - 1; i++) {
@@ -202,7 +230,7 @@ void gravarArquivo(Matricula vetor[], int *qtd) {
     fclose(arquivo);
 }
 
-int menu() {
+int menu(void) {
 	int op;
 
 	printf("\n\nSISTEMA ACADEMICO\n\n");
@@ -215,14 +243,12 @@ int menu() {
 	printf("7 - Listar\n");
 	printf("0 - Sair\n");
 	do {
-		printf("Escolha sua opcao: ");
-		scanf(" %d", &op);
-		limparBuffer();
+		op = lerInteiro("Escolha sua opção: ");
 	} while(op < 0 || op > 7);
 	return op;
 }
 
-int main() {
+int main(void) {
     #ifdef _WIN32
     SetConsoleOutputCP(65001);
     #endif
@@ -240,12 +266,12 @@ int main() {
                 inserirAluno(vetor, &qtd);
                 break;
             case 2:
-                printf("\nDigite o número da matrícula: ");
-                scanf(" %d", &matricula);
-                limparBuffer();
+                matricula = lerInteiro("\nDigite o número da matrícula: ");
                 i = pesquisarPorMatricula(vetor, qtd, matricula);
-                if (i >=0) {
+                if (i >= 0) {
                     imprimirMatricula (vetor[i]);
+                } else {
+                    printf("Matrícula não encontrada.\n");
                 }
                 break;
             case 3:
@@ -272,9 +298,6 @@ int main() {
             default:
                 printf("\nOpção inválida. Digite um número entre 0 e 7.\n");
         }
-        #ifdef _WIN32
-        system("PAUSE");
-        #endif
     } while (op != 0);
     gravarArquivo(vetor, &qtd);
     return 0;

@@ -3,14 +3,7 @@
 **Sistemas de Informação · IFES Campus Colatina**  
 Banco de Dados · Desenvolvimento de Software · Análise de Dados
 
-Sou estudante de Sistemas de Informação, com formação prevista para dezembro de 2028. Neste portfólio, organizo projetos acadêmicos, atividades de extensão e estudos desenvolvidos ao longo da graduação.
-
-## Áreas de interesse
-
-- Banco de Dados e SQL
-- Desenvolvimento com Python, C e C++
-- Análise e visualização de dados
-- Business Intelligence e Power BI
+Sou estudante de Sistemas de Informação, com formação prevista para dezembro de 2028. Este portfólio reúne códigos de projetos acadêmicos concluídos, estudos práticos e experiências desenvolvidas durante a graduação.
 
 ## Conhecimentos técnicos
 
@@ -18,63 +11,66 @@ Sou estudante de Sistemas de Informação, com formação prevista para dezembro
 | --- | --- |
 | Programação | Python, C e C++ |
 | Banco de dados | SQL, PostgreSQL, modelagem de dados e operações CRUD |
-| Dados | Power BI, pandas e matplotlib |
-| Desenvolvimento web | HTML e CSS |
-| Fundamentos | Estruturas de dados, algoritmos, busca, ordenação e arquivos CSV |
+| Dados e visualização | pandas, matplotlib e Power BI |
+| Governança e segurança | Auditoria de acessos, indicadores de TI e fundamentos de COBIT |
+| Fundamentos | Algoritmos, recursão, estruturas de dados e processamento paralelo |
 | Ferramentas | Git e GitHub |
 
-## Projetos acadêmicos
+## Projetos com código disponível
 
-### [Sistema de Locadora](projetos/sistema-locadora/)
+### [Sistema Acadêmico em C](projetos/sistema-academico-c/)
 
-Aplicação acadêmica em Python e PostgreSQL para cadastro de filmes e clientes, organização de locações e controle de disponibilidade.
+Sistema de cadastro de estudantes e matrículas com pesquisa, atualização, exclusão e persistência em arquivo binário.
 
-**Tecnologias:** Python · PostgreSQL · SQL
+**Tecnologias:** C · structs · CRUD · arquivos binários
 
 ### [Auditoria de Acessos e Logs](projetos/auditoria-acessos/)
 
-Análise de logs para identificar contas órfãs, acessos fora do horário e endereços IP externos, com visualização dos riscos. Projeto acadêmico desenvolvido em dupla.
+Cruzamento de logs com usuários ativos para detectar contas órfãs, acessos fora do horário comercial e IPs externos. Inclui bases sintéticas de demonstração.
 
-**Tecnologias:** Python · pandas · matplotlib
+**Tecnologias:** Python · pandas · matplotlib · CSV
 
-### [Estruturas de Dados](projetos/estruturas-dados/)
+### [Sistema de Gestão do Conhecimento](projetos/gestao-conhecimento-sgc/)
 
-Atividades com arquivos CSV, listas duplamente encadeadas, vetores, busca, ordenação e medição de desempenho.
+Base de conhecimento com pesquisa textual, cadastro de conteúdos, persistência em JSON e painel de popularidade.
 
-**Tecnologias:** C · C++
+**Tecnologias:** Python · JSON · manipulação de arquivos
 
-### [Iniciação Científica - PICTI/PROFNIT](projetos/iniciacao-cientifica-picti-profnit/)
+### [Painel de Governança de TI](projetos/painel-governanca-ti/)
 
-Projeto voltado à organização, análise e visualização de dados, com planejamento de uma plataforma de visualizações.
+Consolidação de incidentes, níveis de prioridade e problemas abertos para acompanhamento de serviços de TI.
 
-**Áreas:** Análise de Dados · Business Intelligence · Power BI
+**Tecnologias:** Python · pandas · indicadores de gestão
 
-### [Elas Programadoras](projetos/elas-programadoras/)
+### [Avaliação de Governança com COBIT](projetos/governanca-cobit/)
 
-Projeto de extensão do IFES com atividades de inclusão digital, oficinas de informática e introdução à inteligência artificial para mulheres.
+Classificação de indicadores nos domínios do COBIT, cálculo de maturidade e identificação de desvios em relação às metas.
 
-**Áreas:** Educação tecnológica · Inteligência Artificial · Inclusão digital
+**Tecnologias:** Python · COBIT · análise de indicadores
 
-### [Gestão da Extensão do IFES](projetos/gestao-extensao-ifes/)
+### [Processamento Paralelo de Transações](projetos/processamento-transacoes/)
 
-Estudo de caso em equipe sobre divulgação, participação da comunidade e análise dos processos de extensão do campus.
+Simulação de eventos com regras automatizadas, clientes VIP, verificação de padrões suspeitos e processamento paralelo.
 
-**Área:** Análise de Sistemas
+**Tecnologias:** Python · multiprocessing · regras de negócio
 
-### [Otimização de Estoque](projetos/otimizacao-estoque/)
+### [Algoritmos em C](projetos/algoritmos-c/)
 
-Estudo quantitativo em equipe sobre a relação entre estoque e custos de refrigeração.
+Exercícios concluídos de recursão, validação de entradas e cálculo de médias.
 
-**Área:** Modelagem e análise quantitativa
+**Tecnologias:** C · funções · recursão
 
-## Formação
+## Outras experiências e projetos documentados
 
-**Bacharelado em Sistemas de Informação**  
-Instituto Federal do Espírito Santo - Campus Colatina  
-Conclusão prevista: dezembro de 2028
+- [Sistema de Locadora](projetos/sistema-locadora/): projeto acadêmico envolvendo Python, PostgreSQL e operações CRUD.
+- [Estruturas de Dados](projetos/estruturas-dados/): estudos de organização de dados, algoritmos e programação em C/C++.
+- [Iniciação Científica PICTI/PROFNIT](projetos/iniciacao-cientifica-picti-profnit/): experiência acadêmica de pesquisa e análise.
+- [Elas Programadoras](projetos/elas-programadoras/): participação em atividades de formação em tecnologia.
+- [Gestão de Extensão IFES](projetos/gestao-extensao-ifes/): organização de informações relacionadas a projetos de extensão.
+- [Otimização de Estoque](projetos/otimizacao-estoque/): análise de processos e organização de dados para gestão de estoque.
+
+> Os códigos disponibilizados correspondem aos arquivos e relatórios acadêmicos recuperados. Os demais projetos permanecem documentados enquanto seus arquivos originais não estiverem disponíveis.
 
 ## Objetivo profissional
 
-Procuro oportunidades de estágio e projetos nas áreas de Banco de Dados, Desenvolvimento de Software, Análise de Dados e Business Intelligence.
-
-> Os projetos estão documentados de acordo com as atividades realmente desenvolvidas. Os códigos-fonte originais serão adicionados quando estiverem disponíveis.
+Busco oportunidades de estágio e desenvolvimento nas áreas de banco de dados, análise de dados e desenvolvimento de software.

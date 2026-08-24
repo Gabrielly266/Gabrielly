@@ -1,20 +1,14 @@
-# Sistema Acadêmico em C
+# Sistema acadêmico
 
-Sistema de terminal para cadastro e acompanhamento de matrículas acadêmicas, com persistência dos registros em arquivo binário.
+Programa em C para cadastrar estudantes e acompanhar suas matrículas. Os dados ficam salvos em um arquivo binário, então continuam disponíveis na próxima execução.
 
-## Funcionalidades
+O menu permite cadastrar, buscar por matrícula ou nome, atualizar o coeficiente, excluir e listar estudantes. Também mostra o maior coeficiente da turma.
 
-- Cadastro, pesquisa e exclusão de estudantes.
-- Consulta por número de matrícula ou nome.
-- Atualização e comparação de coeficientes acadêmicos.
-- Listagem dos registros e gravação em `matricula.bin`.
-- Validação dos limites de entrada e execução em Windows, Linux ou macOS.
-
-## Como executar
+## Executar
 
 ```bash
 gcc -std=c11 -Wall -Wextra sistema_academico.c -o sistema_academico
 ./sistema_academico
 ```
 
-**Conceitos:** structs, vetores, funções, operações CRUD, manipulação de arquivos e validação de dados.
+O arquivo `matricula.bin` é criado automaticamente. O sistema aceita até 100 matrículas, evita cadastros repetidos e valida as entradas numéricas.

@@ -1,61 +1,82 @@
-from datetime import datetime
-import random
+"""Processamento paralelo de transações fictícias com regras de negócio."""
+
+import argparse
 import multiprocessing
+import random
+from collections import Counter
 
-def processar_transacao(evento, log_de_transacoes):
-    agora = datetime.now().strftime("%H:%M:%S")
 
-    print(
-        f"[{agora}] NOVO EVENTO: Cliente {evento['cliente']} | "
-        f"Valor: R${evento['valor']} | VIP: {evento['vip']}"
+LIMITE_DESCONTO = 1_000.0
+PERCENTUAL_DESCONTO = 0.15
+
+
+def gerar_transacoes(quantidade, seed=None):
+    gerador = random.Random(seed)
+    return [
+        {
+            "cliente": f"Cliente_{gerador.randint(1, 1_000)}",
+            "valor": round(gerador.uniform(50, 5_000), 2),
+            "vip": gerador.choice((True, False)),
+        }
+        for _ in range(quantidade)
+    ]
+
+
+def processar_transacao(evento):
+    resultado = evento.copy()
+    resultado["desconto_aplicado"] = evento["valor"] > LIMITE_DESCONTO
+    if resultado["desconto_aplicado"]:
+        resultado["valor"] = round(evento["valor"] * (1 - PERCENTUAL_DESCONTO), 2)
+    return resultado
+
+
+def identificar_alertas(transacoes):
+    compras_por_cliente = Counter(
+        transacao["cliente"] for transacao in transacoes if not transacao["vip"]
     )
+    return {
+        cliente: quantidade
+        for cliente, quantidade in compras_por_cliente.items()
+        if quantidade > 2
+    }
 
-    # --- REGRA DE NEGÓCIO ---
-    if evento['valor'] > 1000:
-        evento['valor'] *= 0.85
-        print(f" [AUTOMAÇÃO]: Desconto aplicado. Novo valor: R${evento['valor']:.2f}")
 
-    # --- REGRA DE FRAUDE (SOMENTE NÃO VIP) ---
-    if not evento['vip']:
-        compras_anteriores = [
-            t for t in log_de_transacoes if t['cliente'] == evento['cliente']
-        ]
+def processar_lote(eventos, processos=None):
+    if not eventos:
+        return []
 
-        if len(compras_anteriores) >= 2:
-            print(
-                f" [ALERTA CEP]: Cliente {evento['cliente']} "
-                f"com múltiplas transações rápidas."
-            )
-    else:
-        print(f" [VIP]: Cliente {evento['cliente']} isento de verificação de fraude.")
+    quantidade_processos = min(processos or multiprocessing.cpu_count(), len(eventos))
+    if quantidade_processos == 1:
+        return [processar_transacao(evento) for evento in eventos]
 
-    # Armazena o evento no log compartilhado
-    log_de_transacoes.append(evento)
+    with multiprocessing.Pool(processes=quantidade_processos) as pool:
+        return pool.map(processar_transacao, eventos)
+
+
+def main():
+    argumentos = argparse.ArgumentParser(
+        description="Simula o processamento paralelo de transações."
+    )
+    argumentos.add_argument("--quantidade", type=int, default=1_000)
+    argumentos.add_argument("--processos", type=int, default=None)
+    argumentos.add_argument("--seed", type=int, default=None)
+    opcoes = argumentos.parse_args()
+
+    if opcoes.quantidade < 1:
+        argumentos.error("--quantidade precisa ser maior que zero")
+    if opcoes.processos is not None and opcoes.processos < 1:
+        argumentos.error("--processos precisa ser maior que zero")
+
+    eventos = gerar_transacoes(opcoes.quantidade, seed=opcoes.seed)
+    resultados = processar_lote(eventos, processos=opcoes.processos)
+    alertas = identificar_alertas(resultados)
+    descontos = sum(transacao["desconto_aplicado"] for transacao in resultados)
+
+    print(f"Transações processadas: {len(resultados)}")
+    print(f"Descontos aplicados: {descontos}")
+    print(f"Clientes não VIP com compras recorrentes: {len(alertas)}")
+
 
 if __name__ == "__main__":
     multiprocessing.freeze_support()
-
-    manager = multiprocessing.Manager()
-    log_de_transacoes = manager.list()
-
-    nomes_clientes = [f"Cliente_{i}" for i in range(1, 1001)]
-
-    fluxo_entrada = []
-    for _ in range(10000):
-        fluxo_entrada.append({
-            'cliente': random.choice(nomes_clientes),
-            'valor': round(random.uniform(50, 5000), 2),
-            'vip': random.choice([True, False])
-        })
-
-    num_processos = multiprocessing.cpu_count()
-    print(f"Processando com {num_processos} processos...\n")
-
-    with multiprocessing.Pool(processes=num_processos) as pool:
-        pool.starmap(
-            processar_transacao,
-            [(evento, log_de_transacoes) for evento in fluxo_entrada]
-        )
-
-    print("\nProcessamento concluído!")
-    print(f"Total de transações processadas: {len(log_de_transacoes)}")
+    main()

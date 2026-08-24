@@ -1,18 +1,13 @@
-# Sistema de Gestão do Conhecimento
+# Base de conhecimento
 
-Aplicação de terminal para registrar, pesquisar e acompanhar conteúdos de uma base de conhecimento de TI.
+Aplicação em Python para organizar artigos e pesquisar informações por título ou conteúdo. Os registros são armazenados em JSON.
 
-## Funcionalidades
+Além do cadastro e da pesquisa, o programa acompanha a quantidade de acessos e apresenta os artigos mais consultados.
 
-- Cadastro de novos artigos e persistência em JSON.
-- Pesquisa por título ou conteúdo.
-- Contagem de acessos por artigo.
-- Dashboard textual de popularidade.
-
-## Como executar
+## Executar
 
 ```bash
 python sgc.py
 ```
 
-O arquivo `base_conhecimento.json` é criado automaticamente durante a utilização. O projeto utiliza apenas a biblioteca padrão do Python.
+Não há dependências externas. O arquivo `base_conhecimento.json` é criado na pasta do projeto durante o uso.

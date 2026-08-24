@@ -1,27 +1,21 @@
 # Auditoria de Acessos e Logs
 
-Projeto acadêmico desenvolvido em dupla durante a graduação em Sistemas de Informação.
+Script de auditoria que cruza registros de acesso com uma base de usuários ativos para identificar riscos de segurança.
 
-## Objetivo
+## Verificações realizadas
 
-Analisar registros de acesso e dados de usuários para identificar situações que merecem atenção em uma auditoria de segurança.
+- Contas presentes nos logs, mas ausentes da base de usuários ativos.
+- Acessos registrados fora do horário comercial, das 8h às 18h.
+- Acessos bem-sucedidos provenientes de endereços IP externos.
+- Geração de um gráfico com a distribuição dos riscos identificados.
 
-## Análises realizadas
+## Como executar
 
-- Identificação de contas órfãs.
-- Verificação de acessos realizados fora do horário esperado.
-- Detecção de conexões provenientes de endereços IP externos.
-- Organização dos resultados em uma análise técnica.
-- Visualização dos riscos identificados por meio de gráficos.
+```bash
+pip install -r requirements.txt
+python auditoria.py
+```
 
-## Tecnologias
+Os arquivos CSV incluídos contêm **exclusivamente dados sintéticos**, criados para demonstrar a execução sem expor informações pessoais ou registros reais. O gráfico é salvo como `riscos_seguranca.png`.
 
-Python, pandas e matplotlib.
-
-## Participação
-
-Atividade desenvolvida em equipe, com foco na análise dos registros e visualização dos resultados.
-
-## Publicação
-
-Esta pasta apresenta a documentação da atividade. O código-fonte original ainda não foi anexado a este repositório.
+**Tecnologias:** Python, pandas, matplotlib e arquivos CSV.
